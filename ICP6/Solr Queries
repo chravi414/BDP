@@ -1,0 +1,60 @@
+1) Film Dataset:
+
+	1) solrctl instancedir --generate /tmp/films
+
+		cd /tmp/films/conf
+		
+		gedit /tmp/films/conf/schema.xml
+
+
+	2) Creating Collection 
+
+		solrctl instancedir --create films /tmp/films
+		solrctl collection --create films
+
+	3) Queries:
+
+		a) Word Matching - name : Park
+
+		b) Wildspace Match - name : ?ark
+
+		c) Proximity Query - name : "Alone dark"~2 // Shows the result with name contains alone and dark words separated by a distance of 2.
+
+		d) Range Query - initial_release_date: [2003-10-10 TO 2004-10-10] 
+
+		e) Fuzzy Logic - name: dark~ // displays the results with name matches any of these characters
+
+2) Books Dataset:
+
+	
+	1) solrctl instancedir --generate /tmp/books
+
+		cd /tmp/books/conf
+		
+		gedit /tmp/books/conf/schema.xml
+
+
+	2) Creating Collection 
+
+		solrctl instancedir --create books /tmp/books
+		solrctl collection --create books
+
+	3) Queries
+
+		a) Word match - cat : book
+
+		b) Range Match - price : [6 TO 7]
+
+		c) Facet Query - 
+		
+			inStock : false
+			facet field : inStock // it display the count of each value in the result query
+
+		d) Logical comparison - genre_s: fantasy AND inStock : true AND price: [7 TO 8]
+
+		e) Specific fields Query - 
+
+			genre_s: scifi 
+			f1 : cat, author, price 
+
+
